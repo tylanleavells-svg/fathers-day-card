@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mr. Leavells System</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Consolas, monospace;
+    background: #0d1117;
+    color: #00ff88;
+    overflow: hidden;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    padding-top: 15vh;
+    position: relative;
+}
+
+.active {
+    display: block;
+}
+
+/* Button row (YES + NO side by side) */
+.btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Buttons */
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.yes-btn {
+    background: #00ff88;
+    color: black;
+}
+
+.no-btn {
+    background: red;
+    color: white;
+    position: relative;
+}
+
+/* Final message */
+.message {
+    max-width: 800px;
+    margin: auto;
+    text-align: left;
+    line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen active">
+    <h1>MR. LEAVELLS DETECTION SYSTEM v1.0</h1>
+    <p>Are you Mr. Leavells?</p>
+
+    <div class="btn-row">
+        <button class="yes-btn" onclick="go('verify1')">YES</button>
+        <button id="noBtn" class="no-btn">NO</button>
+    </div>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="no1" class="screen">
+    <h1>WARNING</h1>
+    <p>This system is intended for Mr. Leavells only.</p>
+
+    <div class="btn-row">
+        <button class="yes-btn" onclick="go('verify1')">YES</button>
+        <button onclick="go('no2')">NO</button>
+    </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="no2" class="screen">
+    <h1>ERROR</h1>
+    <p>I don't believe you.</p>
+    <p>Because then how am I here, Mr. Leavells?</p>
+
+    <div class="btn-row">
+        <button class="yes-btn" onclick="go('verify1')">YES</button>
+        <button onclick="go('no3')">NO</button>
+    </div>
+</div>
+
+<!-- SCREEN 4 -->
+<div id="no3" class="screen">
+    <h1>SYSTEM OVERRIDE</h1>
+    <p>Alright.</p>
+    <p>I'm taking away the NO button.</p>
+
+    <button class="yes-btn" onclick="go('verify1')">CONTINUE</button>
+</div>
+
+<!-- VERIFICATION -->
+<div id="verify1" class="screen">
+    <h1>Identity Check 1/3</h1>
+    <p>Are you Mr. Leavells?</p>
+    <button class="yes-btn" onclick="go('verify2')">YES</button>
+</div>
+
+<div id="verify2" class="screen">
+    <h1>Identity Check 2/3</h1>
+    <p>Just confirming…</p>
+    <button class="yes-btn" onclick="go('verify3')">YES</button>
+</div>
+
+<div id="verify3" class="screen">
+    <h1>Identity Check 3/3</h1>
+    <p>Last chance to deny identity.</p>
+    <button class="yes-btn" onclick="go('message')">YES</button>
+</div>
+
+<!-- FINAL MESSAGE -->
+<div id="message" class="screen">
+    <h1>IDENTITY CONFIRMED</h1>
+    <h3>Status: Mr. Leavells</h3>
+
+    <div class="message">
+
+        <p>Happy Father's Day, Dad.</p>
+
+        <p>
+        I honestly didn't know what to get you since you usually
+        get what you want immediately, so I made this instead.
+        </p>
+
+        <p>
+        I'm grateful for everything you've done for me and everything
+        you've taught me.
+        </p>
+
+        <p>
+        You've faced many obstacles in life that shaped who you are.
+        </p>
+
+        <p>
+        Dealing with all of your children hasn't always been easy,
+        and we've tested your patience more than we should have.
+        </p>
+
+        <p>
+        But we appreciate everything you do for us.
+        </p>
+
+        <p>
+        Thank you for everything.
+        </p>
+
+        <p>- Missle</p>
+
+    </div>
+
+    <h2>Program Completed Successfully</h2>
+</div>
+
+<!-- SOUND -->
+<audio id="teleportSound">
+    <source src="https://www.myinstants.com/media/sounds/instant-transmission.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// screen switching
+function go(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+// NO button chaos
+const noBtn = document.getElementById("noBtn");
+const sound = document.getElementById("teleportSound");
+
+noBtn.addEventListener("mouseover", () => {
+
+    // play sound
+    sound.currentTime = 0;
+    sound.play();
+
+    // teleport button
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+</script>
+
+</body>
+</html>
